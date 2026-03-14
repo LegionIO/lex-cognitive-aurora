@@ -12,9 +12,9 @@ module Legion
           LUMINOSITY_DECAY   = 0.03
           LUMINOSITY_BOOST   = 0.1
 
-          HARMONY_THRESHOLD   = 0.7
+          HARMONY_THRESHOLD = 0.7
           BRILLIANCE_THRESHOLD = 0.8
-          FAINT_THRESHOLD     = 0.2
+          FAINT_THRESHOLD = 0.2
 
           AURORA_TYPES = %i[
             harmonic
@@ -50,19 +50,19 @@ module Legion
           ].freeze
 
           LUMINOSITY_LABELS = {
-            (0.0...0.2)  => :faint,
-            (0.2...0.4)  => :dim,
-            (0.4...0.6)  => :moderate,
-            (0.6...0.8)  => :bright,
-            (0.8..1.0)   => :brilliant
+            (0.0...0.2) => :faint,
+            (0.2...0.4) => :dim,
+            (0.4...0.6) => :moderate,
+            (0.6...0.8) => :bright,
+            (0.8..1.0)  => :brilliant
           }.freeze
 
           HARMONY_LABELS = {
-            (0.0...0.3)  => :discordant,
-            (0.3...0.5)  => :unsettled,
-            (0.5...0.7)  => :resonating,
-            (0.7...0.9)  => :harmonious,
-            (0.9..1.0)   => :perfect
+            (0.0...0.3) => :discordant,
+            (0.3...0.5) => :unsettled,
+            (0.5...0.7) => :resonating,
+            (0.7...0.9) => :harmonious,
+            (0.9..1.0)  => :perfect
           }.freeze
 
           BRILLIANCE_LABELS = {

@@ -11,7 +11,7 @@ RSpec.describe Legion::Extensions::CognitiveAurora::Helpers::AuroraEngine do
       luminosity:              0.7,
       harmony_score:           0.6
     }
-    engine.detect_aurora(**defaults.merge(overrides))
+    engine.detect_aurora(**defaults, **overrides)
   end
 
   describe '#detect_aurora' do
@@ -26,7 +26,7 @@ RSpec.describe Legion::Extensions::CognitiveAurora::Helpers::AuroraEngine do
     end
 
     it 'stores events with correct attributes' do
-      event = detect(aurora_type: :resonant, domain: :emotion, luminosity: 0.9)
+      event = detect(type: :resonant, domain: :emotion, luminosity: 0.9)
       expect(event.aurora_type).to eq(:resonant)
       expect(event.domain).to eq(:emotion)
       expect(event.luminosity).to be_within(0.001).of(0.9)

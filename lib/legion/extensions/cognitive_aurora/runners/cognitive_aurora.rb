@@ -45,9 +45,9 @@ module Legion
 
           def list_brilliant(limit: 10, engine: nil, **)
             target_engine = engine || default_engine
-            events = target_engine.most_brilliant(limit: limit)
+            events = target_engine.brilliant_events.sort_by { |e| -e.luminosity }.first(limit)
 
-            Legion::Logging.debug "[cognitive_aurora] list_brilliant: found #{events.size} events (limit=#{limit})"
+            Legion::Logging.debug "[cognitive_aurora] list_brilliant: found #{events.size} brilliant events (limit=#{limit})"
             { success: true, events: events.map(&:to_h), count: events.size }
           rescue StandardError => e
             Legion::Logging.error "[cognitive_aurora] list_brilliant failed: #{e.message}"

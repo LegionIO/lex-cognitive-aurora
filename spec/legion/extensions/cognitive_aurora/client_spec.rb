@@ -6,15 +6,15 @@ RSpec.describe Legion::Extensions::CognitiveAurora::Client do
   describe '#detect_aurora' do
     it 'returns a success hash' do
       result = client.detect_aurora(type: :harmonic, domain: :memory,
-                                     contributing_subsystems: %i[memory emotion],
-                                     luminosity: 0.7, harmony_score: 0.6)
+                                    contributing_subsystems: %i[memory emotion],
+                                    luminosity: 0.7, harmony_score: 0.6)
       expect(result[:success]).to be true
     end
 
     it 'returns an event hash under :event key' do
       result = client.detect_aurora(type: :harmonic, domain: :memory,
-                                     contributing_subsystems: %i[memory emotion],
-                                     luminosity: 0.7, harmony_score: 0.6)
+                                    contributing_subsystems: %i[memory emotion],
+                                    luminosity: 0.7, harmony_score: 0.6)
       expect(result[:event]).to be_a(Hash)
       expect(result[:event]).to include(:id, :aurora_type, :luminosity)
     end
@@ -28,8 +28,8 @@ RSpec.describe Legion::Extensions::CognitiveAurora::Client do
     it 'accepts an external engine' do
       engine = Legion::Extensions::CognitiveAurora::Helpers::AuroraEngine.new
       result = client.detect_aurora(type: :resonant, domain: :emotion,
-                                     contributing_subsystems: [:emotion],
-                                     luminosity: 0.8, harmony_score: 0.7, engine: engine)
+                                    contributing_subsystems: [:emotion],
+                                    luminosity: 0.8, harmony_score: 0.7, engine: engine)
       expect(result[:success]).to be true
       expect(engine.aurora_frequency).to eq(1)
     end
@@ -38,8 +38,8 @@ RSpec.describe Legion::Extensions::CognitiveAurora::Client do
       engine = Legion::Extensions::CognitiveAurora::Helpers::AuroraEngine.new
       3.times do
         client.detect_aurora(type: :harmonic, domain: :memory,
-                              contributing_subsystems: [:memory], luminosity: 0.7, harmony_score: 0.6,
-                              engine: engine)
+                             contributing_subsystems: [:memory], luminosity: 0.7, harmony_score: 0.6,
+                             engine: engine)
       end
       expect(engine.aurora_frequency).to eq(3)
     end
@@ -48,8 +48,8 @@ RSpec.describe Legion::Extensions::CognitiveAurora::Client do
   describe '#fade_all' do
     before do
       client.detect_aurora(type: :harmonic, domain: :memory,
-                            contributing_subsystems: %i[memory emotion],
-                            luminosity: 0.95, harmony_score: 0.8)
+                           contributing_subsystems: %i[memory emotion],
+                           luminosity: 0.95, harmony_score: 0.8)
     end
 
     it 'returns success' do
@@ -79,9 +79,9 @@ RSpec.describe Legion::Extensions::CognitiveAurora::Client do
   describe '#list_brilliant' do
     before do
       client.detect_aurora(type: :harmonic, domain: :memory,
-                            contributing_subsystems: [:memory], luminosity: 0.95, harmony_score: 0.8)
+                           contributing_subsystems: [:memory], luminosity: 0.95, harmony_score: 0.8)
       client.detect_aurora(type: :resonant, domain: :emotion,
-                            contributing_subsystems: [:emotion], luminosity: 0.4, harmony_score: 0.5)
+                           contributing_subsystems: [:emotion], luminosity: 0.4, harmony_score: 0.5)
     end
 
     it 'returns success' do
@@ -101,7 +101,9 @@ RSpec.describe Legion::Extensions::CognitiveAurora::Client do
 
     it 'respects the limit parameter' do
       engine = Legion::Extensions::CognitiveAurora::Helpers::AuroraEngine.new
-      10.times { |i| engine.detect_aurora(type: :harmonic, domain: :memory, contributing_subsystems: [:memory], luminosity: 0.9 - (i * 0.001), harmony_score: 0.8) }
+      10.times do |i|
+        engine.detect_aurora(type: :harmonic, domain: :memory, contributing_subsystems: [:memory], luminosity: 0.9 - (i * 0.001), harmony_score: 0.8)
+      end
       result = client.list_brilliant(limit: 3, engine: engine)
       expect(result[:events].size).to be <= 3
     end
@@ -115,8 +117,8 @@ RSpec.describe Legion::Extensions::CognitiveAurora::Client do
   describe '#aurora_status' do
     before do
       client.detect_aurora(type: :harmonic, domain: :memory,
-                            contributing_subsystems: %i[memory emotion],
-                            luminosity: 0.8, harmony_score: 0.75)
+                           contributing_subsystems: %i[memory emotion],
+                           luminosity: 0.8, harmony_score: 0.75)
     end
 
     it 'returns success' do
@@ -152,7 +154,7 @@ RSpec.describe Legion::Extensions::CognitiveAurora::Client do
       client1 = described_class.new
       client2 = described_class.new
       client1.detect_aurora(type: :harmonic, domain: :memory,
-                             contributing_subsystems: [:memory], luminosity: 0.7, harmony_score: 0.6)
+                            contributing_subsystems: [:memory], luminosity: 0.7, harmony_score: 0.6)
       result1 = client1.aurora_status
       result2 = client2.aurora_status
       expect(result1[:report][:total_events]).to eq(1)

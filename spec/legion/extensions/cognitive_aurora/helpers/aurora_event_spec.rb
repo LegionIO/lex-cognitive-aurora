@@ -52,7 +52,7 @@ RSpec.describe Legion::Extensions::CognitiveAurora::Helpers::AuroraEvent do
 
     it 'converts contributing_subsystems strings to symbols' do
       e = described_class.new(aurora_type: :harmonic, domain: :memory,
-                               contributing_subsystems: %w[memory emotion], luminosity: 0.5, harmony_score: 0.5)
+                              contributing_subsystems: %w[memory emotion], luminosity: 0.5, harmony_score: 0.5)
       expect(e.contributing_subsystems).to eq(%i[memory emotion])
     end
   end
@@ -66,7 +66,7 @@ RSpec.describe Legion::Extensions::CognitiveAurora::Helpers::AuroraEvent do
 
     it 'does not go below 0' do
       faint = described_class.new(aurora_type: :harmonic, domain: :memory,
-                                   contributing_subsystems: [], luminosity: 0.01, harmony_score: 0.5)
+                                  contributing_subsystems: [], luminosity: 0.01, harmony_score: 0.5)
       faint.fade!
       expect(faint.luminosity).to be >= 0.0
     end
@@ -91,13 +91,13 @@ RSpec.describe Legion::Extensions::CognitiveAurora::Helpers::AuroraEvent do
 
     it 'returns false when luminosity is below threshold' do
       dim = described_class.new(aurora_type: :harmonic, domain: :memory,
-                                 contributing_subsystems: [], luminosity: 0.5, harmony_score: 0.5)
+                                contributing_subsystems: [], luminosity: 0.5, harmony_score: 0.5)
       expect(dim.brilliant?).to be false
     end
 
     it 'returns false at exactly BRILLIANCE_THRESHOLD' do
       threshold = described_class.new(aurora_type: :harmonic, domain: :memory,
-                                       contributing_subsystems: [], luminosity: 0.8, harmony_score: 0.5)
+                                      contributing_subsystems: [], luminosity: 0.8, harmony_score: 0.5)
       expect(threshold.brilliant?).to be false
     end
   end
@@ -109,13 +109,13 @@ RSpec.describe Legion::Extensions::CognitiveAurora::Helpers::AuroraEvent do
 
     it 'returns true when luminosity < FAINT_THRESHOLD' do
       dim = described_class.new(aurora_type: :harmonic, domain: :memory,
-                                 contributing_subsystems: [], luminosity: 0.1, harmony_score: 0.5)
+                                contributing_subsystems: [], luminosity: 0.1, harmony_score: 0.5)
       expect(dim.faint?).to be true
     end
 
     it 'returns false at exactly FAINT_THRESHOLD' do
       threshold = described_class.new(aurora_type: :harmonic, domain: :memory,
-                                       contributing_subsystems: [], luminosity: 0.2, harmony_score: 0.5)
+                                      contributing_subsystems: [], luminosity: 0.2, harmony_score: 0.5)
       expect(threshold.faint?).to be false
     end
   end
@@ -127,13 +127,13 @@ RSpec.describe Legion::Extensions::CognitiveAurora::Helpers::AuroraEvent do
 
     it 'returns false when harmony is low' do
       discordant = described_class.new(aurora_type: :harmonic, domain: :memory,
-                                        contributing_subsystems: [], luminosity: 0.5, harmony_score: 0.3)
+                                       contributing_subsystems: [], luminosity: 0.5, harmony_score: 0.3)
       expect(discordant.harmonious?).to be false
     end
 
     it 'returns false at exactly HARMONY_THRESHOLD' do
       threshold = described_class.new(aurora_type: :harmonic, domain: :memory,
-                                       contributing_subsystems: [], luminosity: 0.5, harmony_score: 0.7)
+                                      contributing_subsystems: [], luminosity: 0.5, harmony_score: 0.7)
       expect(threshold.harmonious?).to be false
     end
   end
@@ -145,19 +145,19 @@ RSpec.describe Legion::Extensions::CognitiveAurora::Helpers::AuroraEvent do
 
     it 'returns false with exactly 2 subsystems' do
       e = described_class.new(aurora_type: :harmonic, domain: :memory,
-                               contributing_subsystems: %i[memory emotion], luminosity: 0.5, harmony_score: 0.5)
+                              contributing_subsystems: %i[memory emotion], luminosity: 0.5, harmony_score: 0.5)
       expect(e.multi_source?).to be false
     end
 
     it 'returns false with 1 subsystem' do
       e = described_class.new(aurora_type: :harmonic, domain: :memory,
-                               contributing_subsystems: [:memory], luminosity: 0.5, harmony_score: 0.5)
+                              contributing_subsystems: [:memory], luminosity: 0.5, harmony_score: 0.5)
       expect(e.multi_source?).to be false
     end
 
     it 'returns false with empty subsystems' do
       e = described_class.new(aurora_type: :harmonic, domain: :memory,
-                               contributing_subsystems: [], luminosity: 0.5, harmony_score: 0.5)
+                              contributing_subsystems: [], luminosity: 0.5, harmony_score: 0.5)
       expect(e.multi_source?).to be false
     end
   end
@@ -173,13 +173,13 @@ RSpec.describe Legion::Extensions::CognitiveAurora::Helpers::AuroraEvent do
 
     it 'returns :violet for zero luminosity' do
       dim = described_class.new(aurora_type: :harmonic, domain: :memory,
-                                 contributing_subsystems: [], luminosity: 0.0, harmony_score: 0.5)
+                                contributing_subsystems: [], luminosity: 0.0, harmony_score: 0.5)
       expect(dim.spectral_color).to eq(:violet)
     end
 
     it 'returns :ultraviolet for full luminosity' do
       bright = described_class.new(aurora_type: :harmonic, domain: :memory,
-                                    contributing_subsystems: [], luminosity: 1.0, harmony_score: 0.5)
+                                   contributing_subsystems: [], luminosity: 1.0, harmony_score: 0.5)
       expect(bright.spectral_color).to eq(:ultraviolet)
     end
   end

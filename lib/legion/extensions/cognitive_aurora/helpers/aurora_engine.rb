@@ -8,7 +8,7 @@ module Legion
           include Constants
 
           def initialize
-            @events       = []
+            @events = []
             @spectral_bands = {}
           end
 
@@ -83,15 +83,15 @@ module Legion
 
           def aurora_report
             {
-              total_events:         @events.size,
-              overall_luminosity:   overall_luminosity,
-              overall_harmony:      overall_harmony,
-              brilliant_count:      brilliant_events.size,
-              harmonious_count:     harmonious_events.size,
-              active_band_count:    active_bands.size,
+              total_events:          @events.size,
+              overall_luminosity:    overall_luminosity,
+              overall_harmony:       overall_harmony,
+              brilliant_count:       brilliant_events.size,
+              harmonious_count:      harmonious_events.size,
+              active_band_count:     active_bands.size,
               spectral_distribution: spectral_distribution,
-              luminosity_label:     Constants.label_for(overall_luminosity, LUMINOSITY_LABELS),
-              harmony_label:        Constants.label_for(overall_harmony, HARMONY_LABELS)
+              luminosity_label:      Constants.label_for(overall_luminosity, LUMINOSITY_LABELS),
+              harmony_label:         Constants.label_for(overall_harmony, HARMONY_LABELS)
             }
           end
 
