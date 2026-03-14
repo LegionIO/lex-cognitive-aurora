@@ -109,15 +109,18 @@ module Legion
           end
 
           def compute_beauty_score(satisfied, intensity)
-            count        = satisfied.size
-            subsystems   = satisfied.map(&:subsystem).uniq.size
-            coverage     = (count.to_f / [Constants::MAX_CONDITIONS, 1].max).clamp(0.0, 1.0)
-            diversity    = (subsystems.to_f / [count, 1].max).clamp(0.0, 1.0)
-            intensities  = satisfied.map { |c| c.current_value }
-            alignment    = golden_ratio_alignment(intensities)
-
+            coverage, diversity, alignment = beauty_components(satisfied)
             raw = (intensity * 0.4) + (coverage * 0.2) + (diversity * 0.2) + (alignment * 0.2)
             raw.clamp(0.0, 1.0).round(10)
+          end
+
+          def beauty_components(satisfied)
+            count       = satisfied.size
+            subsystems  = satisfied.map(&:subsystem).uniq.size
+            coverage    = (count.to_f / [Constants::MAX_CONDITIONS, 1].max).clamp(0.0, 1.0)
+            diversity   = (subsystems.to_f / [count, 1].max).clamp(0.0, 1.0)
+            alignment   = golden_ratio_alignment(satisfied.map(&:current_value))
+            [coverage, diversity, alignment]
           end
 
           def compute_rarity(satisfied)

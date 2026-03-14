@@ -43,10 +43,10 @@ module Legion
                                   "value=#{current_value} satisfied=#{cond.satisfied?}"
 
             {
-              success:      true,
-              condition_id: condition_id,
+              success:       true,
+              condition_id:  condition_id,
               current_value: cond.current_value,
-              satisfied:    cond.satisfied?
+              satisfied:     cond.satisfied?
             }
           end
 

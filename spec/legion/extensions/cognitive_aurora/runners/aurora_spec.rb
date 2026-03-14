@@ -9,7 +9,7 @@ RSpec.describe Legion::Extensions::CognitiveAurora::Runners::Aurora do
   def setup_converging_conditions(engine, count: 4, value: 0.9)
     count.times do |i|
       engine.register_condition(
-        subsystem:     "sub_#{i}".to_sym,
+        subsystem:     :"sub_#{i}",
         metric:        :intensity,
         threshold:     0.5,
         current_value: value

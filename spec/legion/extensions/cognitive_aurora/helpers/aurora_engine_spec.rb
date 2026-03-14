@@ -6,7 +6,7 @@ RSpec.describe Legion::Extensions::CognitiveAurora::Helpers::AuroraEngine do
   def add_satisfied_conditions(count, engine, base_value: 0.9)
     count.times do |i|
       engine.register_condition(
-        subsystem:     "subsystem_#{i}".to_sym,
+        subsystem:     :"subsystem_#{i}",
         metric:        :intensity,
         threshold:     0.5,
         current_value: base_value
